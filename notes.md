@@ -22,7 +22,7 @@ here i used previously installed EKS cluster to deploy Chat application on it as
 
 
 ### 4) Resilience
-to acheive reselience i need to make a pv and pbc objects and attch it to EFS. and that needs efs csi driver which is not installed on the cluster i used. 
+to acheive reselience i need to make a pv and pvc objects and attch it to EFS. and that needs efs csi driver which is not installed on the cluster i used. 
 
 ### 5) Expose out of cluster
 Finally I configure an application load balancer ingress which provisions new aws alb to redirect its traffic to the Nodeport service and finally to the pod. 
