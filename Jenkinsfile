@@ -1,5 +1,12 @@
 pipeline {
   agent any
+
+  tools {
+        go 'ggo-1-19'
+    }
+    environment {
+        GO111MODULE = 'on'
+    }
    
   stages {
 
