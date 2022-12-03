@@ -19,6 +19,7 @@ Finally, i configured jenkins pipeline from jenkins ui to be triggered from gith
 
 ### 3) Kubernetes
 here i used previously installed EKS cluster to deploy Chat application on it as pod with its service. as in "deployment.yaml" file i configure deployment to run from the image i already pushed to dockerhub with one replica. i also configured a NodePort service expose this deployment to the internet out of the cluster and later to be pointed by a load balancer.
+- you will find all yaml files in "k8s_manifests" directory
 
 
 ### 4) Resilience
