@@ -10,11 +10,19 @@ pipeline {
    
   stages {
 
-    stage('Testing') {
-           steps {
-                 sh 'go test'
-            }    
-    }
+    stage('Compile') {
+            steps {
+                sh 'go build'
+            }
+        }
+        stage('Test') {
+            environment {
+                CODECOV_TOKEN = credentials('codecov_token')
+            }
+            steps {
+                sh 'go test'
+            }
+        }
      
 
      stage('Build') {
