@@ -2,6 +2,14 @@ pipeline {
   agent any
 
   stages {
+
+    stage('Testing') {
+           steps {
+                 sh 'go test'
+                 }    
+           }
+     }
+
      stage('Build') {
            steps {
                  withCredentials([usernamePassword(credentialsId: "docker_credentials", usernameVariable: "username", passwordVariable: "pass")]) {

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: chatting-prod
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:070682830013:certificate/f24f65c7-0e69-4201-a8b8-d97847ac4cf6
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/subnets: subnet-05a01e5e10bb28fa9, subnet-0a1d7c41ba76ac92f, subnet-09f311d8905e0f44c, subnet-00329312c273f1fdd,subnet-0e10005e5f215e320, subnet-0600ece3b97396341
+    alb.ingress.kubernetes.io/security-groups: sg-06b1f663e02395d86, sg-0b49e8510d6085d80
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '300'
+
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+             serviceName: ssl-redirect
+             servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: chatting-prod
+              servicePort: 80

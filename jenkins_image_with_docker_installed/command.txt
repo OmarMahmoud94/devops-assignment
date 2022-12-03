@@ -1,1 +1,2 @@
-docker run -d -p 3030:8080 -v /var/run/docker.sock:/var/run/docker.sock jenkins_image
+docker run -d -p 3030:8080 -v /var/run/docker.sock:/var/run/docker.sock jenkins_docker_img
+sudo chmod 777 /var/run/docker.sock

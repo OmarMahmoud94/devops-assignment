@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatting-deployment
+  namespace: default
+  labels:
+    app: chatting-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatting-prod
+  template:
+    metadata:
+      labels:
+        app: chatting-prod
+    spec:
+      containers:
+      - name: chatting-prod
+        image: omarquraah/go_app_image:lts
+        ports:
+        - containerPort: 4444
+        # envFrom:
+        # - secretRef:
+        #     name: chatting-prod
+      tolerations:
+      - key: "ENV"
+        operator: "Equal"
+        value: "PROD"
+        effect: "NoSchedule"
+      nodeSelector:
+        role: eks-apps-node-groups
