@@ -16,9 +16,6 @@ pipeline {
             }
         }
         stage('Test') {
-            environment {
-                CODECOV_TOKEN = credentials('codecov_token')
-            }
             steps {
                 sh 'go test'
             }
