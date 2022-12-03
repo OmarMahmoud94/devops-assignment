@@ -9,6 +9,7 @@ the problem that takes too much time from me in CI process is that i need jenkin
      - So i customize jenkins base image and install docker on it. you will find it in "jenkins_image_with_docker_installed" directory.
     b) jenkins has to be exposed on the internet so that i can create a webhook from project github repository. 
      - So i launched an EC2 instance and deploy jenkins container from customized image from step 1 
+     - " http://18.212.180.3:2020/ " this is a url to access jenkins. it might be down by the time you are reviewing this task accoeding to its cost. 
     C) jenkins has to have Go installed on it to run required tests.
      - So i install Go plugin on jenkins and configured it and used it in jenkinsfile.
 After I had finished deploying jenkins with all dependencies needed, i configure jenkinsfile with all needed stages:
