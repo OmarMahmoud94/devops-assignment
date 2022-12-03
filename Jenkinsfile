@@ -6,9 +6,9 @@ pipeline {
     stage('Testing') {
            steps {
                  sh 'go test'
-                 }    
-           }
-     }
+            }    
+    }
+     
 
      stage('Build') {
            steps {
