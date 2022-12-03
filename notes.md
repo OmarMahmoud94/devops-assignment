@@ -11,7 +11,19 @@ the problem that takes too much time from me in CI process is that i need jenkin
      - So i launched an EC2 instance and deploy jenkins container from customized image from step 1 
     C) jenkins has to have Go installed on it to run required tests.
      - So i install Go plugin on jenkins and configured it and used it in jenkinsfile.
-After I had finished deploying jenkins with all dependencies needed, i wrote jenkinsfile with all needed stages:
-    a) first stage is to
+After I had finished deploying jenkins with all dependencies needed, i configure jenkinsfile with all needed stages:
+    a) first stage is to run needed tests. 
+    b) second stage is to build dockerfile and push output image to dockerhub. 
+Finally, i configured jenkins pipeline from jenkins ui to be triggered from github webhook. 
+
+### 3) Kubernetes
+here i used previously installed EKS cluster to deploy Chat application on it as pod with its service. as in "deployment.yaml" file i configure deployment to run from the image i already pushed to dockerhub with one replica. i also configured a NodePort service expose this deployment to the internet out of the cluster and later to be pointed by a load balancer.
 
 
+### 4) Resilience
+to acheive reselience i need to make a pv and pbc objects and attch it to EFS. and that needs efs csi driver which is not installed on the cluster i used. 
+
+### 5) Expose out of cluster
+Finally I configure an application load balancer ingress which provisions new aws alb to redirect its traffic to the Nodeport service and finally to the pod. 
+this is the dns name of the alb which we can later point it to real domain in route53 and create certificate to it to be secure on https: 
+  k8s-default-chatting-bdace69f06-321822523.us-east-1.elb.amazonaws.com
